@@ -1,7 +1,7 @@
 
-const conertPagination = function(sourceData,currentPage){
+const conertPagination = function( sourceData, currentPage, category = '?', itemsPerPage = 3){
   const totalResult = sourceData.length // 總資料數
-  const perpage = 3 // 每頁有幾筆資料 3
+  const perpage = itemsPerPage // 每頁有幾筆資料 3
   const pageTotal = Math.ceil(totalResult / perpage) // 總共幾頁
   if(currentPage > pageTotal){
     currentPage = pageTotal
@@ -19,6 +19,7 @@ const conertPagination = function(sourceData,currentPage){
   const page = {
     pageTotal,
     currentPage,
+    category,
     hasNextPage: pageTotal > currentPage,
     hasPreviousPage: currentPage > 1
   }

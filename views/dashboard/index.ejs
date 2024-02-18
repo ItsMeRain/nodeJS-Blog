@@ -1,5 +1,34 @@
 <% extend('../layouts/dashboard-layout') %>
 
 
-
-<h1>歡迎光臨</h1>
+<div class="row my-4 justify-content-center">
+  <div class="col-md-9">
+    <h1>歡迎光臨</h1>
+  </div>
+</div>
+<div class="row my-4 justify-content-center">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">文章總數</h5>
+        <%- articleTotal %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">發佈總數</h5>
+        <%- articlePublicTotal %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">草稿總數</h5>
+        <%- articleDraftotal %>
+      </div>
+    </div>
+  </div>
+</div>

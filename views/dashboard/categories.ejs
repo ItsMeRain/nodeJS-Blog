@@ -17,18 +17,24 @@
           <th>名稱</th>
           <th>路徑</th>
           <th width="30"></th>
+          <th width="30"></th>
         </tr>
       </thead>
       <tbody>
         <% for(var prop in categories){ %>
           <tr>
-            <td class="align-middle"><%- categories[prop].name %></td>
-            <td><input type="text" class="form-control form-control-sm" value="<%- categories[prop].path %>"></td>
-            <td class="align-middle">
-              <form action="/dashboard/categories/delete/<%- prop %>" method="POST">
-                <button type="submit" class="btn btn-outline-danger btn-sm">刪除</button>
-              </form>
-            </td>
+            <form action="/dashboard/categories/update/<%- prop %>" method="POST">
+              <td class="align-middle"><%- categories[prop].name %></td>
+              <td><input type="text" class="form-control form-control-sm" name="<%- prop %>" value="<%- categories[prop].path %>"></td>
+              <td class="align-middle">
+                <button type="submit" class="btn btn-primary btn-sm">更新</button>
+              </td>
+            </form>
+              <td class="align-middle">
+                <form action="/dashboard/categories/delete/<%- prop %>" method="POST">
+                  <button type="submit" class="btn btn-outline-danger btn-sm">刪除</button>
+                </form>
+              </td>
           </tr>
           <% } %>
       </tbody>

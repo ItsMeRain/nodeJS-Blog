@@ -35,11 +35,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <% if(hasOwnProperty('currentPath')){ %>
-        <a class="nav-item nav-link " href="/">前台首頁 </a>
-        <a class="nav-item nav-link <% if(currentPath.match('/index')){ %> active <% } %> " href="/dashboard">後台首頁 </a>
-        <a class="nav-item nav-link <% if(currentPath.match('/archives')){ %> active <% } %> " href="/dashboard/archives">文章管理 </a>
-        <a class="nav-item nav-link <% if(currentPath.match('/creat')){ %> active <% } %> " href="/dashboard/article/creat">新增文章 </a>
-        <a class="nav-item nav-link <% if(currentPath.match('/categories')){ %> active <% } %> " href="/dashboard/categories">分類管理 </a>
+          <a class="nav-item nav-link " href="/">前台首頁 </a>
+          <a class="nav-item nav-link <% if(currentPath.match('/index')){ %> active <% } %> " href="/dashboard">後台首頁 </a>
+          <a class="nav-item nav-link <% if(currentPath.match('/archives')){ %> active <% } %> " href="/dashboard/archives">文章管理 </a>
+          <a class="nav-item nav-link <% if(currentPath.match('/article')){ %> active <% } %> " href="/dashboard/article/creat">新增文章 </a>
+          <a class="nav-item nav-link <% if(currentPath.match('/categories')){ %> active <% } %> " href="/dashboard/categories">分類管理 </a>
         <% } %>
       </div>
     </div>

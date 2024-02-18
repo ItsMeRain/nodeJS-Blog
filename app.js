@@ -8,7 +8,6 @@ const dashboard = require('./routes/dashboard');
 const auth = require('./routes/auth');
 const flash = require('connect-flash');
 const session = require('express-session');
-const { log } = require('console');
 const app = express();
 require('dotenv').config()
 

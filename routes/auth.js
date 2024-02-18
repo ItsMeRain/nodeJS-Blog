@@ -44,7 +44,6 @@ router.post('/signup', function (req, res) {
           'email':email,
           'uid': UserCredential.user.uid
         }
-        console.log(saveUser);
         firebaseAdminDb.ref(`/user/${UserCredential.user.uid}`).set(saveUser)
         res.redirect('/auth/signin')
     })
@@ -64,12 +63,10 @@ router.post('/signin', function (req, res) {
   .then(function(UserCredential){
     req.session.uid = UserCredential.user.uid
     req.session.email = req.body.email
-    console.log('登入成功');
     res.redirect('/dashboard')
   })
   .catch(function(error){
     req.session.uid = ''
-    console.log(error.code);
     req.flash('error','登入失敗')
     res.redirect('/auth/signin')
   })

@@ -1,21 +1,21 @@
 <nav class="my-5" aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     
-      <li class="page-item <% if(!page.hasPreviousPage){ %> disabled <% } %>">
-        <a class="page-link" href="/?page=<%- page.currentPage - 1 %>" tabindex="-1">Previous</a>
+      <li class="page-item <% if(!pagination.hasPreviousPage){ %> disabled <% } %>">
+        <a class="page-link" href="/<%- pagination.category %>page=<%- pagination.currentPage - 1 %>" tabindex="-1">Previous</a>
       </li>
     
 
-    <% for (let i = 1; i < page.pageTotal + 1 ; i++) { %>
-      <li class="page-item <% if(page.currentPage == i){ %> active <% } %>"> 
-        <a class="page-link" href="/?page=<%- i %>">
+    <% for (let i = 1; i < pagination.pageTotal + 1 ; i++) { %>
+      <li class="page-item <% if(pagination.currentPage == i){ %> active <% } %>"> 
+        <a class="page-link" href="/<%- pagination.category %>page=<%- i %>">
           <%- i %>
         </a>
       </li>
     <% } %>
 
-      <li class="page-item <% if(!page.hasNextPage){ %> disabled <% } %>">
-        <a class="page-link" href="/?page=<%- page.currentPage + 1 %>">Next</a>
+      <li class="page-item <% if(!pagination.hasNextPage){ %> disabled <% } %>">
+        <a class="page-link" href="/<%- pagination.category %>page=<%- pagination.currentPage + 1 %>">Next</a>
       </li>
 
   </ul>

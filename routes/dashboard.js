@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const striptags = require('striptags')
 const moment = require('moment')
+const conertPagination = require('../modules/convertPagination')
+const firebaseSort = require('../modules/firebaseSort')
 const firebaseAdminDb = require('../connections/firebase-admin')
 const firebase = require('../connections/firebase_client');
 
@@ -9,12 +11,29 @@ const categoriesRef = firebaseAdminDb.ref('categories')
 const articlesRef = firebaseAdminDb.ref('articles')
 
 router.get('/', function(req, res) {
-  res.render('dashboard/index',{
-    currentPath:"/index"
-  });
+  let articleTotal = 0
+  let articlePublicTotal = 0
+  let articleDraftotal = 0
+  articlesRef.once('value').then(function(snapshot){
+    snapshot.forEach(function(snapshotChild){
+      articleTotal++
+      if(snapshotChild.val().status==="public"){
+        articlePublicTotal++
+      }else if(snapshotChild.val().status==="draft"){
+        articleDraftotal++
+      }
+    })
+    res.render('dashboard/index',{
+      currentPath:"/index",
+      articleTotal,
+      articlePublicTotal,
+      articleDraftotal
+    });
+  })
 });
 
 router.get('/archives', function(req, res) {
+  let currentPage = parseInt(req.query.page) || 1 // 目前在第幾頁
   const status = req.query.status ||'public'
   let categories = {}
   categoriesRef.once('value').then(function(snapshot){
@@ -29,14 +48,17 @@ router.get('/archives', function(req, res) {
       }
     })
     articles.reverse()
+    const data = conertPagination( articles, currentPage, `dashboard/archives?status=${status}&`, 4 )
+    console.log(data);
     // console.log(categories,articles);
     res.render('dashboard/archives', {
       currentPath:"/archives", 
-      articles,
+      'articles':data.data,
       categories,
       striptags,
       moment,
-      status
+      status,
+      'pagination':data.page
     });
   })
 
@@ -46,7 +68,7 @@ router.get('/article/creat', function(req, res) {
   categoriesRef.once('value').then(function(snapshot){
     const categories = snapshot.val()
     res.render('dashboard/article', {
-      currentPath:"/creat",
+      currentPath:"/article",
       categories
       });
   })
@@ -60,7 +82,8 @@ router.get('/article/:id', function(req, res) {
     return articlesRef.child(id).once('value')
   }).then(function(snapshot){
     const article = snapshot.val()
-    res.render('dashboard/article', { 
+    res.render('dashboard/article', {
+      currentPath:"/article", 
       categories,
       article
       });
@@ -142,6 +165,18 @@ router.post('/categories/create', function(req, res) {
         res.redirect('/dashboard/categories');
       })
     }
+  })
+});
+
+router.post('/categories/update/:id', function(req, res) {
+  const id = req.params['id']
+  const path = req.body[req.params['id']]
+  console.log(`id:${id},path:${path}`);
+  const data = {
+    'path':path
+  }
+  categoriesRef.child(id).update(data).then(function(){
+    res.redirect(`/dashboard/categories`);
   })
 });
 
