@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const striptags = require('striptags')
-const moment = require('moment')
 const firebaseAdminDb = require('../connections/firebase-admin')
 const firebase = require('../connections/firebase_client');
 const firebaseAuth = require("firebase/auth");

@@ -3,7 +3,6 @@ const router = express.Router();
 const striptags = require('striptags')
 const moment = require('moment')
 const conertPagination = require('../modules/convertPagination')
-const firebaseSort = require('../modules/firebaseSort')
 const firebaseAdminDb = require('../connections/firebase-admin')
 const firebase = require('../connections/firebase_client');
 
