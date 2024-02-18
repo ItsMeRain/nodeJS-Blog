@@ -49,8 +49,6 @@ router.get('/archives', function(req, res) {
     })
     articles.reverse()
     const data = conertPagination( articles, currentPage, `dashboard/archives?status=${status}&`, 4 )
-    console.log(data);
-    // console.log(categories,articles);
     res.render('dashboard/archives', {
       currentPath:"/archives", 
       'articles':data.data,
@@ -116,7 +114,6 @@ router.post('/article/creat', function(req, res) {
     'id':key,
     'update_time':updateTime
   }
-  // console.log(data);
   articleRef.set(data).then(function(){
     res.redirect(`/dashboard/article/${key}`);
   })
@@ -171,7 +168,6 @@ router.post('/categories/create', function(req, res) {
 router.post('/categories/update/:id', function(req, res) {
   const id = req.params['id']
   const path = req.body[req.params['id']]
-  console.log(`id:${id},path:${path}`);
   const data = {
     'path':path
   }

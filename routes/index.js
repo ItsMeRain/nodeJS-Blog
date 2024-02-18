@@ -75,7 +75,6 @@ router.get('/post/:id', function(req, res) {
   }).then(function(snapshot){
     const article = snapshot.val()
     const categoryId = snapshot.val().category
-    // console.log(categories,article,id);
     res.render('post',{
       categories,
       categoryId,

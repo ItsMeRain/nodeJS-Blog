@@ -39,7 +39,6 @@ router.post('/signup', function (req, res) {
   }else{
     firebaseAuth.createUserWithEmailAndPassword(auth, email, password)
     .then(function(UserCredential){
-      // console.log(UserCredential);
         const saveUser = {
           'email':email,
           'uid': UserCredential.user.uid
@@ -48,7 +47,6 @@ router.post('/signup', function (req, res) {
         res.redirect('/auth/signin')
     })
     .catch(function(error){
-        console.log(error);
         req.flash('error',error.message)
         res.redirect('/auth/signup')
     })
