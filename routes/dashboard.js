@@ -47,7 +47,7 @@ router.get('/archives', function(req, res) {
       }
     })
     articles.reverse()
-    const data = conertPagination( articles, currentPage, `dashboard/archives?status=${status}&`, 4 )
+    const data = conertPagination( articles, currentPage, `dashboard/archives?status=${status}&`, 8 )
     res.render('dashboard/archives', {
       currentPath:"/archives", 
       'articles':data.data,

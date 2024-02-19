@@ -1,5 +1,5 @@
 
-const conertPagination = function( sourceData, currentPage, category = '?', itemsPerPage = 3){
+const conertPagination = function( sourceData, currentPage, category = '?', itemsPerPage = 5){
   const totalResult = sourceData.length // 總資料數
   const perpage = itemsPerPage // 每頁有幾筆資料 3
   const pageTotal = Math.ceil(totalResult / perpage) // 總共幾頁
